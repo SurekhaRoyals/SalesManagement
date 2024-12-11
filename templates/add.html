@@ -5,6 +5,7 @@
     {% csrf_token %}
     <table>
         <tr>
+            {% if salesperson %}
             <td>Sales Person</td>
             <td>
                 <select name="sales_person" required>
@@ -14,6 +15,7 @@
                 </select>
             </td>
         </tr>
+        {% endif %}
         <tr>
             <td>Joining Date</td>
             <td><input type="date" name="txtdate" required></td>
