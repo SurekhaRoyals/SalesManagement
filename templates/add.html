@@ -1,58 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <h1>Welcome to add students</h1>
 <form method="post">
     {% csrf_token %}
-<table>
-    <tr>
-        <td>Sales Person</td>
-        <td>
-            <select name="sales_person">
-                {% for user in users %}
-                <option value="{{ user.id }}">{{ user.username }}</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>joining date</td>
-        <td><input type="date" name="txtdate"></td>
-    </tr>
-    <tr>
-        <td>Name</td>
-        <td><input type="text" name="txtname"></td>
-    </tr>
-    <tr>
-        <td>Age</td>
-        <td><input type="number" name="txtage"></td>
-    </tr>
-    <tr>
-        <td>Mobile</td>
-        <td><input type="text" name="txtmobile"></td>
-    </tr>
-    <tr>
-        <td>Email</td>
-        <td><input type="email" name="txtmail"></td>
-    </tr>
-    <tr>
-        <td>Education</td>
-        <td>
-            <select name="education">
-                <option value="">Select your education</option>
-                <option value="10th">10th</option>
-                <option value="12th">12th or Diploma</option>
-                <option value="graduation">Graduation</option>
-                <option value="postgraduation">Post Graduation</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Skills</td>
-        <td><textarea></textarea></td>
-    </tr>
-
-</table>
-    </form>
-
+    <table>
+        <tr>
+            <td>Sales Person</td>
+            <td>
+                <select name="sales_person" required>
+                    {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Joining Date</td>
+            <td><input type="date" name="txtdate" required></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="txtname" value="{{ student.name }}" required></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><input type="number" name="txtage" value="{{ student.age }}" required></td>
+        </tr>
+        <tr>
+            <td>Mobile</td>
+            <td><input type="text" name="txtmobile" value="{{ student.mobile }}" required></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" name="txtmail" value="{{ student.email }}" required></td>
+        </tr>
+        <tr>
+            <td>Education</td>
+            <td>
+                <select name="education" required>
+                    <option value="{{ student.education }}">Select your education</option>
+                    <option value="10th">10th</option>
+                    <option value="12th">12th or Diploma</option>
+                    <option value="graduation">Graduation</option>
+                    <option value="postgraduation">Post Graduation</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Skills</td>
+            <td><textarea name="skills" required>{{ student.skills }}</textarea></td>
+        </tr>
+    </table>
+</form>
 {% endblock %}

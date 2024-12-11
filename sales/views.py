@@ -78,3 +78,29 @@ def displaystudents(request):
 def home(request):
     return render(request, 'home.html')
 
+
+def update_student(request, id):
+    users = User.objects.all()
+    s1 = Student.objects.get(id = id)
+
+    if request.method == "POST":
+        if request.method == "POST":
+            s1 = Student()
+            s1.sales_person_id = request.POST["sales_person"]
+            s1.joining_date = request.POST["txtdate"]
+            s1.name = request.POST["txtname"]
+            s1.age = request.POST["txtage"]
+            s1.mobile = request.POST["txtmobile"]
+            s1.email = request.POST["txtemail"]
+            s1.education = request.POST["education"]
+            s1.skills = request.POST["skills"]
+            s1.save()
+            return redirect('display')
+    else:
+        return render(request, 'add.html', {"users":users, "student":student})
+
+
+def delete_student(request, id):
+    s1 = Student.objects.get(id = id)
+    s1.delete()
+    return redirect("display")

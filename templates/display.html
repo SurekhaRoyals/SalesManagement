@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
+{% block extra_css %}
+.button{
+       display:inline-block;
+       padding:10px 690px;
+       font-size:16px;
+       cursor:pointer;
+       text-align:center;
+       text-decoration:none;
+       outline:none;
+       color:yellow;
+       background-color:green;
+       border:none;
+       border-radius:10px;
+       box-shadow:0 0 10px red;
+       }
+{% endblock %}
 
 {% block content %}
 
@@ -14,6 +30,8 @@
       <th scope="col">Email</th>
       <th scope="col">Education</th>
       <th scope="col">Skills</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +45,12 @@
     <td>{{ student.email }}</td>
     <td>{{ student.education }}</td>
     <td>{{ student.skills }}</td>
+    <td>
+     <a href="{% url 'update' student.id %}" class="button">update</a>
+    </td>
+    <td>
+      <a href="{% url 'delete' student.id %}" class="button">delete</a>
+    </td>
   </tr>
   {% empty %}
   <tr>
