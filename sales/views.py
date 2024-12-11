@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
+from sales.models import Student
+
 
 # Create your views here.
 def login_func(request):
@@ -14,7 +16,7 @@ def login_func(request):
         user = authenticate(username=name, password=password)
         if user is not None:
             if user.is_superuser:
-                return HttpResponse("Welcome to admin page")
+                return render(request, 'home.html')
 
             elif user.is_authenticated:
                 return HttpResponse("Welcome to sales page")
@@ -45,3 +47,34 @@ def signup_func(request):
 
     else:
         return render(request,'signup.html')
+
+
+
+
+def addstudent(request):
+    if request.method == "POST":
+        s1 = Student()
+        s1.sales_person_id = request.POST["sales_person"]
+        s1.joining_date = request.POST["txtdate"]
+        s1.name = request.POST["txtname"]
+        s1.age = request.POST["txtage"]
+        s1.mobile = request.POST["txtmobile"]
+        s1.email = request.POST["txtemail"]
+        s1.education = request.POST["education"]
+        s1.skills = request.POST["skills"]
+        s1.save()
+        return redirect('display')
+
+    else:
+        users = User.objects.all()
+        return render(request, 'add.html',{"users":users})
+
+
+def displaystudents(request):
+    students = Student.objects.all()
+    return render(request, 'display.html', {"students":students})
+
+
+def home(request):
+    return render(request, 'home.html')
+
