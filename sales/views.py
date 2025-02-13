@@ -95,7 +95,10 @@ def home(request):
         return render(request, 'home.html', {"sales" : True, "user": user})
 
 
-# def update_student(request, id, student=None):
+
+
+
+def update_student(request, id, student=None):
     users = User.objects.all()
     s1 = Student.objects.get(id = id)
 
@@ -117,8 +120,8 @@ def home(request):
             return redirect('display')
     else:
         if user1 == "admin":
-            users = Use.objects.all()
-            return render(request, 'add.html', {"users":users})
+            users = User.objects.all()
+            return render(request, 'add.html', {"users":users, "salesperson":True})
         else:
             return render(request, 'add.html', {"salesperson" : False})
 
